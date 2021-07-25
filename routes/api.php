@@ -18,3 +18,20 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
+Route ::get('floreria',function(){
+    return ['rosa','girasol','claveles'];
+});
+Route ::get('floreria/{id}',function(){
+    return ['flores'];
+});
+Route ::post('floreria',function(){
+    return 'realizado';
+});
+
+Route ::put('floreria/{id}',function(){
+    return '<-----Actualizado';
+});
+
+Route ::delete('floreria/',function(){
+    return 'Eliminado......';
+});
