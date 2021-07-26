@@ -16,3 +16,21 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+//Mauricio
+
+Route ::get('cod',function(){
+    return ['AK117, Pharo, Shorty'];
+});
+Route ::get('cod{id}',function(){
+    return ['Shorty'];
+});
+Route ::post('cod',function(){
+    return 'agregado 202!';
+});
+Route ::put('cod/{id}',function(){
+    return 'update succesfull 202!';
+});
+Route ::delete('cod',function(){
+    return "Delete succesfull";
+});
