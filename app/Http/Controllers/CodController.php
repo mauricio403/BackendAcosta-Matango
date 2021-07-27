@@ -9,9 +9,9 @@ class CodController extends Controller
     
     public function index()
     {
-            $flowers = ['Shorty','Peacekeeper','LK24'];
+            $cods = ['Shorty','Peacekeeper','LK24'];
         return response()->json(
-           ['data'=> $flowers,
+           ['data'=> $cods,
            'msg'=>['sumary'=> 'consulta sucessfull',
            'detail'=>'la consulta es exitosa 200', 
            'code'=>'201']], 201);
@@ -32,9 +32,9 @@ class CodController extends Controller
 
     public function show($id)
     {
-        $flower = 'Shorty';
+        $cod = 'Shorty';
         return response()->json(
-           ['data'=> $flower,
+           ['data'=> $cods,
            'msg'=>['sumary'=> 'request succesfull',
            'detail'=>'la consulta es exitosa', 
            'code'=>'201']], 201);
