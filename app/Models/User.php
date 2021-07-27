@@ -13,23 +13,23 @@ class User extends Authenticatable
 
     /**
      * The attributes that are mass assignable.
-     *
      * @var array
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
+    protected $fillable  =[
+        'code',
+        'descripcion',
+        'date',
+        'title',
+        'is_approved',
+     ];
 
     /**
      * The attributes that should be hidden for arrays.
-     *
      * @var array
      */
-    protected $hidden = [
-        'password',
-        'remember_token',
+    protected $casts = [
+        'is_approved' => 'boolean',
+        'date' => 'datetime:Y-m-d',
     ];
 
     /**
@@ -40,4 +40,27 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    function setPasswordAttribute($value){
+        $this->attributes['password'] = Hash::make($value); 
+    }
+
+    // uno a uno
+
+    // function rose(){
+   // return $this->hasOne(related:Rose::class);
+
+}
+// uno a varios
+        /*function roses(){
+            return $this->hasMany(related:Rose::class);
+      { */
+// varios a varios
+function setCodeAttribute($value)
+    {
+        $this->attributes['code'] = strtoupper($value);
+    }
+    
+// Accessors
+
 }
