@@ -30,7 +30,7 @@ class CodController extends Controller
         
     }
 
-    public function show($id)
+    public function show($cods)
     {
         $cod = 'Shorty';
         return response()->json(

@@ -42,4 +42,3 @@ Route::apiResource('cod/{guns}/shorty',CodController::class);
 Route::prefix('cod/{gun}/shorty/{id}')->group(function () {
    Route::patch('state',[CodController::class,'updateState']);
 });
-
