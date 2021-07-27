@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\FlowersControllers;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,20 +19,31 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-Route ::get('floreria',function(){
-    return ['rosa','girasol','claveles'];
+/*Route ::get('flowers/{flower}/roses',function(){
+        return['rosa','girasol'];
+    
 });
-Route ::get('floreria/{id}',function(){
-    return ['flores'];
+
+Route ::get('flowers/{flower}/flores/{rose}',function(){
+    return ['Trébol amarillo','Lirio '];
 });
-Route ::post('floreria',function(){
+
+Route ::post('flowers/{flower}/roses',function(){
     return 'realizado';
 });
 
-Route ::put('floreria/{id}',function(){
+Route ::put('flowers/{flower}/flores/{rose}',function(){
     return '<-----Actualizado';
 });
 
-Route ::delete('floreria/',function(){
+Route ::delete('flowers/{flower}/flores/{rose}',function(){
     return 'Eliminado......';
+});*/
+
+Route::apiResource('flowers/{flower}/rose',FlowersControllers::class);
+
+Route::apiResource('flower/{floreria}/rose',FlowersControllers::class);
+
+Route::prefix('flower/{flower}/rose/{rose}')->group(function () {
+   Route::patch('state',[FlowersControllers::class,'updateState']);
 });
