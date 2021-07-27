@@ -2,12 +2,17 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+// use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Cod extends Model
 {
+<<<<<<< HEAD
     //use HasFactory;
+=======
+    // use HasFactory;
+
+>>>>>>> 10d0f1cfa9045a1ac502329b7e6cb1b43605c181
     protected $table = 'cods';
 
     protected $attributes = [
@@ -17,6 +22,7 @@ class Cod extends Model
         'is_aprovved',
         'tittle',
     ];
+<<<<<<< HEAD
     //uno a uno
     function cod (){
         return $this-> belongsTo(relaled:cod::class);
@@ -39,3 +45,14 @@ class Cod extends Model
 
 
 }
+=======
+
+    public function cod(){
+        return $this ->hasOne(Cod::class);
+    }
+
+
+
+}
+
+>>>>>>> 10d0f1cfa9045a1ac502329b7e6cb1b43605c181
