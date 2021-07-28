@@ -15,7 +15,7 @@ class CreateAppGunsTable extends Migration
     {
         Schema::connection(env('DB_CONNECTION_APP'))->create('guns', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('rose_id')->constrained('app.roses');
+//$table->foreignId('rose_id')->constrained('app.roses');//
             $table->string('code');
             $table->text('description');
             $table->string('tittle');
