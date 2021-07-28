@@ -12,11 +12,11 @@ class Rose extends Model
     protected $table ='roses';
 
     protected $attributes =[
-'code',
-'descripcion',
-'date',
-'title',
-'is_approved',
+        'code',
+        'descripcion',
+        'date',
+        'title',
+        'is_approved',
    ];
 
 // uno a uno
@@ -37,7 +37,6 @@ class Rose extends Model
 
  /*function roses(){
   return $this-> belongsToMany(related:Rose::class);
-
  }*/
 
 //mutators

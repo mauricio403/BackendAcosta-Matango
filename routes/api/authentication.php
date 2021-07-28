@@ -44,5 +44,5 @@ Route::apiResource('flowers/{flower}/rose',FlowersControllers::class);
 
 Route::prefix('flower/{flower}/rose/{rose}')->group(function () {
    Route::patch('state',[FlowersControllers::class,'updateState']);
-
-
+}
+);
