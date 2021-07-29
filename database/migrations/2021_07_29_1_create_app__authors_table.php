@@ -9,12 +9,16 @@ class CreateAppAuthorsTable extends Migration
     /**
      * Run the migrations.
      *
-     * @return void
+     * 
      */
     public function up()
     {
         Schema::connection(env('DB_CONNECTION_APP'))->create('authors', function (Blueprint $table) {
             $table->id();
+            $table->string('email');
+            $table->string('identification');
+            $table->string('names');
+            $table->string('phone');
             $table->timestamps();
         });
     }

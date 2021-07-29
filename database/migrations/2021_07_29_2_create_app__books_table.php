@@ -15,6 +15,11 @@ class CreateAppBooksTable extends Migration
     {
         Schema::connection(env('DB_CONNECTION_APP'))->create('books', function (Blueprint $table) {
             $table->id();
+            $table->string('code');
+            $table->date('date');
+            $table->text('description');
+            $table->boolean('published');
+            $table->string('title');
             $table->timestamps();
         });
     }
