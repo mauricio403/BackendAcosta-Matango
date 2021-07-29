@@ -19,7 +19,28 @@ class Book extends Model
         'published',
 
     ];
+
+    protected $casts = [
+        'published' => 'boolean'
+    ];
+
+
     public function author(){
-        return $this->hasOne(Author::class);
+        return $this->hasMany(Author::class);
     }
+
+    //mutators
+
+    function setCodeAttribute($value){
+        $this->attributes['code'] = strtoupper($value);
+    }
+
+    //accesors
+
+    function getCodeAttribute(){
+       return strtolower( $this->attributes['code']);
+    }
+
+
+
 }
