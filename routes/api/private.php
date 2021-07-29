@@ -39,10 +39,9 @@ Route ::put('flowers/{flower}/flores/{rose}',function(){
 Route ::delete('flowers/{flower}/flores/{rose}',function(){
     return 'Eliminado......';
 });*/
+Route::apiResource('books/{book}/book',FlowersControllers::class);
 
-Route::apiResource('flowers/{flower}/rose',FlowersControllers::class);
-
-Route::prefix('flower/{flower}/rose/{rose}')->group(function () {
+Route::prefix('book/{book}/book/{book}')->group(function () {
    Route::patch('state',[FlowersControllers::class,'updateState']);
 }
 );

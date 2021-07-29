@@ -19,30 +19,30 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-/*Route ::get('flowers/{flower}/roses',function(){
+Route ::get('books/{book}/book',function(){
         return['rosa','girasol'];
     
 });
 
-Route ::get('flowers/{flower}/flores/{rose}',function(){
+Route ::get('books/{book}/books/{book}',function(){
     return ['Trébol amarillo','Lirio '];
 });
 
-Route ::post('flowers/{flower}/roses',function(){
+Route ::post('books/{book}/book',function(){
     return 'realizado';
 });
 
-Route ::put('flowers/{flower}/flores/{rose}',function(){
+Route ::put('books/{book}/books/{book}',function(){
     return '<-----Actualizado';
 });
 
-Route ::delete('flowers/{flower}/flores/{rose}',function(){
+Route ::delete('books/{books}/books/{book}',function(){
     return 'Eliminado......';
-});*/
+});
 
-Route::apiResource('flowers/{flower}/rose',FlowersControllers::class);
+Route::apiResource('books/{book}/book',FlowersControllers::class);
 
-Route::prefix('flower/{flower}/rose/{rose}')->group(function () {
+Route::prefix('book/{book}/book/{book}')->group(function () {
    Route::patch('state',[FlowersControllers::class,'updateState']);
 }
 );
