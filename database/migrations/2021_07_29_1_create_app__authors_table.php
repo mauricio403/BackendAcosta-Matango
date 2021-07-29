@@ -14,13 +14,21 @@ class CreateAppAuthorsTable extends Migration
     public function up()
     {
         Schema::connection(env('DB_CONNECTION_APP'))->create('authors', function (Blueprint $table) {
-            $table->id();
+            $table->id();  //obligatorio con el mau xd
+
+            $table->foreignId('book_id')->constrained('app.books');
+
+
+            $table->integer('age') 
+                ->unsigned();
+             
             $table->string('email');
             $table->string('identification');
             $table->string('names');
             $table->string('phone');
-            $table->timestamps();
-        });
+            $table->softDeletes();  //obligatorio con el mau xd
+            $table->timestamps();  //obligatorio con el mau xd
+        });  
     }
 
     /**

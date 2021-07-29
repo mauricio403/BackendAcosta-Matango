@@ -15,8 +15,8 @@ class Book extends Model
         'code',
         'date',
         'description',
-        'title',
         'published',
+        'title',
 
     ];
 

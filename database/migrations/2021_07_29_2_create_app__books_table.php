@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use phpDocumentor\Reflection\Types\Nullable;
 
 class CreateAppBooksTable extends Migration
 {
@@ -14,13 +15,26 @@ class CreateAppBooksTable extends Migration
     public function up()
     {
         Schema::connection(env('DB_CONNECTION_APP'))->create('books', function (Blueprint $table) {
-            $table->id();
-            $table->string('code');
-            $table->date('date');
-            $table->text('description');
-            $table->boolean('published');
-            $table->string('title');
-            $table->timestamps();
+            $table->id();  //obligatorio con el mau xd
+
+            $table->string('code')
+               ->comment('campo de codigo');
+
+            $table->date('date') 
+               ->comment('campo de fecha');
+
+            $table->text('description') 
+               ->comment('campo de descripcion');
+
+            $table->boolean('published')
+                ->default(true)
+                ->comment('campo de si esta publicado');
+
+            $table->string('title') 
+               ->comment('campo de titulo');
+
+            $table->softDeletes(); //obligatorio con el mau xd
+            $table->timestamps();  //obligatorio con el mau xd
         });
     }
 
