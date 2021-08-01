@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Author extends Model
 {
     use HasFactory;
-    use HasFactory;
-    protected $table ='authors';
+   
+    protected $table ='app.authors';
 
     protected $fillable = [
         'age',

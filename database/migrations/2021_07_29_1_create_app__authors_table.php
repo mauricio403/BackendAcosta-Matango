@@ -16,16 +16,16 @@ class CreateAppAuthorsTable extends Migration
         Schema::connection(env('DB_CONNECTION_APP'))->create('authors', function (Blueprint $table) {
             $table->id();  //obligatorio con el mau xd
 
-            $table->foreignId('book_id')
-              ->constrained('app.books');
+            $table->foreignId('book_id');
+            //   ->constrained('app.books');
 
             $table->integer('age') 
                 ->unsigned();
              
-            $table->string('email');
-            $table->string('identification');
-            $table->string('names');
-            $table->string('phone');
+            $table->text('email');
+            $table->text('identification');
+            $table->text('names');
+            $table->text('phone');
             $table->softDeletes();  //obligatorio con el mau xd
             $table->timestamps();  //obligatorio con el mau xd
         });  

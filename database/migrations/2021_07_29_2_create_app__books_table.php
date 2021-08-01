@@ -17,7 +17,7 @@ class CreateAppBooksTable extends Migration
         Schema::connection(env('DB_CONNECTION_APP'))->create('books', function (Blueprint $table) {
             $table->id();  //obligatorio con el mau xd
 
-            $table->string('code')
+            $table->text('code')
                ->comment('campo de codigo');
 
             $table->date('date') 
@@ -30,7 +30,7 @@ class CreateAppBooksTable extends Migration
                 ->default(true)
                 ->comment('campo de si esta publicado');
 
-            $table->string('title') 
+            $table->text('title') 
                ->comment('campo de titulo');
 
             $table->softDeletes(); //obligatorio con el mau xd
