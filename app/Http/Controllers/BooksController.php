@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Book;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BooksController extends Controller
 {
@@ -13,8 +15,18 @@ class BooksController extends Controller
      */
     public function index()
     {
-        //
-        $books = ['100 años de soledad', 'historia para tontos', 'La odisea'];
+        //consulta sql pura
+        // $books = DB::select('select * from app.books');
+
+        //con query builder
+
+        // $books = DB::table('app.books')->get();
+
+        //con eloquent -> con mis modelos
+
+        $books = Book::get();
+
+
         return response()->json(
             [
                 'data' => $books,
@@ -36,8 +48,25 @@ class BooksController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        $book = 'historia para tontos';
+        //eloquent
+        // $book = Book::create([
+        //     'code'=>$request->code,
+        //     'date'=>$request->date,
+        //     'description'=>$request->description,
+        //     'published'=>$request->published,
+        //     'title'=>$request->title,
+
+        // ]);
+
+        $book = new Book();
+        $book->code = $request->code;
+        $book->date = $request->date;
+        $book->description = $request->description;
+        $book->published = $request->published;
+        $book->title = $request->title;
+        $book->save();
+
+
         return response()->json(
             [
                 'data' => $book,
@@ -57,10 +86,20 @@ class BooksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($book)
     {
-        //
-        $book = '100 años de soledad';
+         //consulta sql pura
+        //  $book = DB::select('select * from app.books where id=?', [$book]);
+
+         //con query builder
+
+        //  $book = DB::table('app.books')->where('id','=',$book)->first();
+
+        //con eloquent
+
+        $book = Book::find($book);
+
+ 
         return response()->json(
             [
                 'data' => $book,
