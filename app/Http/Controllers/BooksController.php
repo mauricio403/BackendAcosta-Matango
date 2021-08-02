@@ -99,7 +99,6 @@ class BooksController extends Controller
 
         $book = Book::find($book);
 
- 
         return response()->json(
             [
                 'data' => $book,

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Author;
+use App\Models\Book;
 use Illuminate\Http\Request;
 
 class AuthorsController extends Controller
@@ -14,7 +16,8 @@ class AuthorsController extends Controller
     public function index()
     {
         //
-        $authors = ['Julio Verne', 'Isaac Asimov', 'El pepe'];
+      
+        $authors = Author::get();
         return response()->json(
             [
                 'data' => $authors,
@@ -37,7 +40,15 @@ class AuthorsController extends Controller
     public function store(Request $request)
     {
         //
-        $author = 'Isaac Asimov';
+        $author = new Author();
+        $book = Book::find($request->book['id']);
+        $author->book()->associate($book);
+        $author->age = $request->age;
+        $author->email = $request->email;
+        $author->identification = $request->identification;
+        $author->names = $request->names;
+        $author->phone = $request->phone;
+        $author->save();
         return response()->json(
             [
                 'data' => $author,
@@ -57,10 +68,10 @@ class AuthorsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show( $author)
     {
         //
-        $author = 'el pepe';
+        $author = Author::find($author);
         return response()->json(
             [
                 'data' => $author,
@@ -81,9 +92,21 @@ class AuthorsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $author)
     {
         //
+
+        $author = Author::find($author);
+        $book = Book::find($request->book['id']);
+        $author->book()->associate($book);
+
+        $author->age = $request->age;
+        $author->email = $request->email;
+        $author->identification = $request->identification;
+        $author->names = $request->names;
+        $author->phone = $request->phone;
+        $author->save();
+
         return response()->json(
             [
                 'data' => null,
@@ -103,10 +126,11 @@ class AuthorsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($author)
     {
         //
-        $author = 'sr Red';
+        $author =  Book::find($author);
+        $author -> delete();
         return response()->json(
             [
                 'data' => $author,
