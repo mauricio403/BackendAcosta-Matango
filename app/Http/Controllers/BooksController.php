@@ -120,9 +120,18 @@ class BooksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $book)
     {
-        //
+        // eloquent
+        $book =  Book::find($book);
+        $book->code = $request->code;
+        $book->date = $request->date;
+        $book->description = $request->description;
+        $book->published = $request->published;
+        $book->title = $request->title;
+        $book->save();
+
+
         return response()->json(
             [
                 'data' => null,
@@ -142,10 +151,11 @@ class BooksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($book)
     {
         //
-        $book = 'La odisea';
+        $book =  Book::find($book);
+        $book -> delete();
         return response()->json(
             [
                 'data' => $book,
