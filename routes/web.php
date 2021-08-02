@@ -19,19 +19,46 @@ Route::get('/', function () {
 
 //Mauricio
 
-Route ::get('authors',function(){
-    return ['AK117, Pharo, Shorty'];
+
+
+Route ::get('authors/{idAuthor}/books',function(){
+    return ['100 años de soledad, historia para tontos, La odisea'];
+});  // => muestra la lista de libros de un author
+
+
+Route ::get('authors/{idAuthor}/books/{idBook}',function(){
+    return ['El retrato de Dorian Gray'];
 });
-Route ::get('authors{id}',function(){
-    return ['Shorty'];
+Route ::post('authors/{idAuthor}/books',function(){
+    return 'Libro agregado 202! al usuario ';
 });
-Route ::post('authors',function(){
-    return 'agregado 202!';
+Route ::put('authors/{idAuthor}/books/{idBook}',function(){
+    return 'Book updated succesfull 202!';
 });
-Route ::put('authors/{id}',function(){
-    return 'update succesfull 202!';
-});
-Route ::delete('authors',function(){
+Route ::delete('authors/{idAuthor}/books/{idBook}',function(){
     return "Delete succesfull";
 });
 
+
+//paola
+
+Route ::get('flowers/{flower}/roses',function(){
+        return['rosa','girasol'];
+    
+});
+
+Route ::get('flowers/{flower}/flores/{rose}',function(){
+    return ['Trébol amarillo','Lirio '];
+});
+
+Route ::post('flowers/{flower}/roses',function(){
+    return 'realizado';
+});
+
+Route ::put('flowers/{flower}/flores/{rose}',function(){
+    return '<-----Actualizado';
+});
+
+Route ::delete('flowers/{flower}/flores/{rose}',function(){
+    return 'Eliminado......';
+});

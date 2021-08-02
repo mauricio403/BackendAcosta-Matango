@@ -39,9 +39,9 @@ Route ::put('flowers/{flower}/flores/{rose}',function(){
 Route ::delete('flowers/{flower}/flores/{rose}',function(){
     return 'Eliminado......';
 });*/
-Route::apiResource('books/{book}/book',FlowersControllers::class);
+// Route::apiResource('books/{book}/book',FlowersControllers::class);
 
-Route::prefix('book/{book}/book/{book}')->group(function () {
-   Route::patch('state',[FlowersControllers::class,'updateState']);
-}
-);
+// Route::prefix('book/{book}/book/{book}')->group(function () {
+//    Route::patch('state',[FlowersControllers::class,'updateState']);
+// }
+// );
