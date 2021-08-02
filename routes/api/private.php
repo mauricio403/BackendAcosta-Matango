@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AuthorsController;
+use App\Http\Controllers\BooksController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\FlowersControllers;
 use Illuminate\Support\Facades\Route;
@@ -19,29 +21,29 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-/*Route ::get('flowers/{flower}/roses',function(){
-        return['rosa','girasol'];
-    
+Route::apiResource('books', BooksController::class);
+
+
+//esto sirve para agregar funcionalidades deiferentes a un crud
+
+Route::prefix('book')->group(function () {
+    Route::prefix('{book}')->group(function () {
+        Route::patch('state', [BooksController::class, 'updateState']);
+    });
+    Route::prefix('')->group(function () {
+        Route::patch('state', [BooksController::class, 'updateState']);
+    });
 });
 
-Route ::get('flowers/{flower}/flores/{rose}',function(){
-    return ['Trébol amarillo','Lirio '];
+
+
+Route::apiResource('books.authors', AuthorsController::class);
+
+Route::prefix('book/{books}/authors')->group(function () {
+    Route::prefix('{author}')->group(function () {
+        Route::patch('state', [BooksController::class, 'updateState']);
+    });
+    Route::prefix('')->group(function () {
+        Route::patch('state', [BooksController::class, 'updateState']);
+    });
 });
-
-Route ::post('flowers/{flower}/roses',function(){
-    return 'realizado';
-});
-
-Route ::put('flowers/{flower}/flores/{rose}',function(){
-    return '<-----Actualizado';
-});
-
-Route ::delete('flowers/{flower}/flores/{rose}',function(){
-    return 'Eliminado......';
-});*/
-// Route::apiResource('books/{book}/book',FlowersControllers::class);
-
-// Route::prefix('book/{book}/book/{book}')->group(function () {
-//    Route::patch('state',[FlowersControllers::class,'updateState']);
-// }
-// );

@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\AuthorsController;
+use App\Http\Controllers\BooksController;
 use Illuminate\Http\Request;
-use App\Http\Controllers\FlowersControllers;
+// use App\Http\Controllers\FlowersControllers;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,34 +17,34 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::middleware('auth:api')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
+Route::middleware('auth:api')->get('/user', function (Request $request) {
+    return $request->user();
+});
 
-// Route ::get('books/{book}/book',function(){
-//         return['rosa','girasol'];
-    
-// });
 
-// Route ::get('books/{book}/books/{book}',function(){
-//     return ['Trébol amarillo','Lirio '];
-// });
+Route::apiResource('books', BooksController::class);
 
-// Route ::post('books/{book}/book',function(){
-//     return 'realizado';
-// });
 
-// Route ::put('books/{book}/books/{book}',function(){
-//     return '<-----Actualizado';
-// });
+//esto sirve para agregar funcionalidades deiferentes a un crud
 
-// Route ::delete('books/{books}/books/{book}',function(){
-//     return 'Eliminado......';
-// });
+Route::prefix('book')->group(function () {
+    Route::prefix('{book}')->group(function () {
+        Route::patch('state', [BooksController::class, 'updateState']);
+    });
+    Route::prefix('')->group(function () {
+        Route::patch('state', [BooksController::class, 'updateState']);
+    });
+});
 
-// Route::apiResource('books/{book}/book',FlowersControllers::class);
 
-// Route::prefix('book/{book}/book/{book}')->group(function () {
-//    Route::patch('state',[FlowersControllers::class,'updateState']);
-// }
-// );
+
+Route::apiResource('books.authors', AuthorsController::class);
+
+Route::prefix('book/{books}/authors')->group(function () {
+    Route::prefix('{author}')->group(function () {
+        Route::patch('state', [BooksController::class, 'updateState']);
+    });
+    Route::prefix('')->group(function () {
+        Route::patch('state', [BooksController::class, 'updateState']);
+    });
+});
