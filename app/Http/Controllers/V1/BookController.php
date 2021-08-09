@@ -1,12 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\V1;
 
+use App\Http\Controllers\Controller;
+use App\Http\Requests\V1\Books\StoreBookRequest;
+use App\Http\Requests\V1\Books\UpdateBookRequest;
+use App\Http\Resources\V1\Books\BookCollection;
+use App\Http\Resources\V1\Books\BookResource;
 use App\Models\Book;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
-class BooksController extends Controller
+class BookController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,29 +19,20 @@ class BooksController extends Controller
      */
     public function index()
     {
-        //consulta sql pura
-        // $books = DB::select('select * from app.books');
-
-        //con query builder
-
-        // $books = DB::table('app.books')->get();
-
-        //con eloquent -> con mis modelos
-
-        $books = Book::get();
-
-
-        return response()->json(
-            [
-                'data' => $books,
-                'msg' => [
-                    'sumary' => 'consulta correcta',
-                    'detail' => 'la consulta de libros fue correcta',
-                    'code' => '200'
-                ]
-            ],
-            200
-        );
+        return new BookCollection(Book::paginate());
+       
+        // $books = Book::get();
+        // return response()->json(
+        //     [
+        //         'data' => $books,
+        //         'msg' => [
+        //             'sumary' => 'consulta correcta',
+        //             'detail' => 'la consulta de libros fue correcta',
+        //             'code' => '200'
+        //         ]
+        //     ],
+        //     200
+        // );
     }
 
     /**
@@ -46,17 +41,9 @@ class BooksController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreBookRequest $request)
     {
-        //eloquent
-        // $book = Book::create([
-        //     'code'=>$request->code,
-        //     'date'=>$request->date,
-        //     'description'=>$request->description,
-        //     'published'=>$request->published,
-        //     'title'=>$request->title,
-
-        // ]);
+   
 
         $book = new Book();
         $book->code = $request->code;
@@ -86,30 +73,21 @@ class BooksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($book)
+    public function show(Book $book)
     {
-         //consulta sql pura
-        //  $book = DB::select('select * from app.books where id=?', [$book]);
+        return new BookResource( $book);
 
-         //con query builder
-
-        //  $book = DB::table('app.books')->where('id','=',$book)->first();
-
-        //con eloquent
-
-        $book = Book::find($book);
-
-        return response()->json(
-            [
-                'data' => $book,
-                'msg' => [
-                    'sumary' => 'consulta correcta',
-                    'detail' => 'la consulta del libro fue correcta',
-                    'code' => '200'
-                ]
-            ],
-            200
-        );
+        // return response()->json(
+        //     [
+        //         'data' => $book,
+        //         'msg' => [
+        //             'sumary' => 'consulta correcta',
+        //             'detail' => 'la consulta del libro fue correcta',
+        //             'code' => '200'
+        //         ]
+        //     ],
+        //     200
+        // );
     }
 
     /**
@@ -119,10 +97,10 @@ class BooksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $book)
+    public function update(UpdateBookRequest $request, Book $book)
     {
         // eloquent
-        $book =  Book::find($book);
+        // $book =  Book::find($book);
         $book->code = $request->code;
         $book->date = $request->date;
         $book->description = $request->description;
@@ -150,16 +128,21 @@ class BooksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($book)
+
+    
+
+
+
+    public function destroy(Book $book)
     {
         //
-        $book =  Book::find($book);
+        // $book =  Book::find($book);
         $book -> delete();
         return response()->json(
             [
-                'data' => $book,
+                'data' => $book, 
                 'msg' => [
-                    'sumary' => 'consulta correcta',
+                    'sumary' => 'Libro elminado',
                     'detail' => 'eliminado de libros fue correcta',
                     'code' => '201'
                 ]
@@ -167,6 +150,24 @@ class BooksController extends Controller
             201
         );
     }
+
+    public function destroys( $request)
+    {
+        $books = Book::whereIn('id', $request->input('ids'))->get();
+        Book::destroy($request->input('ids'));
+
+        return (new BookCollection($books))
+            ->additional([
+                'msg' => [
+                    'summary' => 'Usuarios Eliminados',
+                    'detail' => '',
+                    'code' => '201'
+                ]
+            ]);
+    }
+
+
+
 
     public function updateState() {
         $book = 'aprobado';

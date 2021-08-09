@@ -1,12 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\V1;
 
+use App\Http\Controllers\Controller;
 use App\Models\Author;
 use App\Models\Book;
 use Illuminate\Http\Request;
 
-class AuthorsController extends Controller
+
+class AuthorController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -137,6 +139,20 @@ class AuthorsController extends Controller
                 'msg' => [
                     'sumary' => 'consulta correcta',
                     'detail' => 'eliminado de autor fue correcta',
+                    'code' => '201'
+                ]
+            ],
+            201
+        );
+    }
+    public function updateState() {
+        $author = 'aprobado';
+        return response()->json(
+            [
+                'data' => $author,
+                'msg' => [
+                    'sumary' => 'consulta correcta',
+                    'detail' => 'le estado del libro fue correctamente actualizado',
                     'code' => '201'
                 ]
             ],
